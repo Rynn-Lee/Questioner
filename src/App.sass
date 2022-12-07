@@ -1,0 +1,65 @@
+body
+  background: #151521
+  margin: 0px
+  padding: 0px
+  color: #fff
+  font:
+    size: calc(var(--index) / 1)
+    family: monospace
+
+$theme: #ff9e5e
+.theme
+  color: $theme
+
+.App
+  display: flex
+  flex-direction: row
+
+:root
+  --index: calc(1vw+1vh)
+
+.sidebar
+  display: flex
+  flex-direction: column
+  justify-content: space-between
+  position: fixed
+  left: 0px
+  top: 0px
+  height: 100vh
+  background: #191929
+
+.logo
+  transition: 0.2s
+  user-select: none
+  padding: 20px
+  &:hover
+    color: $theme
+
+.buttons
+  display: flex
+  flex-direction: column
+  padding: 0px
+  margin: 0px
+  .btn
+    padding: 20px
+    transition: 0.2s
+    &:hover
+      background: #242435
+
+.fa
+  margin-left: 8px
+  font-size: calc(var(--index) / 1.15)
+
+.about
+  padding: 20px
+  transition: 0.2s
+  &:hover
+    background: #242435
+
+.content-wrapper
+  position: relative
+  display: flex
+  background: #242435
+  left: 10.2vw
+  padding: 25px
+  right: 0px
