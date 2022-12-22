@@ -11,6 +11,14 @@ $theme: #ff9e5e
 .theme
   color: $theme
 
+hr
+  width: 100%
+  border: 1px solid $theme
+
+.fa
+  margin-left: 8px
+  font-size: calc(var(--index) / 1.15)
+
 .App
   display: flex
   flex-direction: row
@@ -25,8 +33,10 @@ $theme: #ff9e5e
   position: fixed
   left: 0px
   top: 0px
+  width: 100px
   height: 100vh
   background: #191929
+  text-align: center
 
 .logo
   transition: 0.2s
@@ -40,15 +50,15 @@ $theme: #ff9e5e
   flex-direction: column
   padding: 0px
   margin: 0px
+  user-select: none
+  color: #bbbbbb
   .btn
-    padding: 20px
+    padding: 20px 0px 20px 0px
     transition: 0.2s
     &:hover
       background: #242435
+      color: $theme
 
-.fa
-  margin-left: 8px
-  font-size: calc(var(--index) / 1.15)
 
 .about
   padding: 20px
@@ -57,9 +67,82 @@ $theme: #ff9e5e
     background: #242435
 
 .content-wrapper
-  position: relative
+  position: fixed
   display: flex
-  background: #242435
-  left: 10.2vw
-  padding: 25px
+  left: 100px
   right: 0px
+  flex-direction: column
+
+.page-title
+  padding: 15px
+  left: 0px
+  right: 0px
+  font-size: 12pt
+  text-align: center
+  background: #191929
+
+.content
+  padding: 15px
+  left: 0px
+  right: 0px
+
+.create-content
+  display: flex
+  justify-content: center
+  justify-items: center
+  vertical-align: middle
+  padding: 10px
+
+.horizontal
+  display: flex
+  flex-direction: row
+
+
+.creation-card
+  padding: 15px
+  background: #191929
+  border-radius: 3px
+  text-align: center
+  &>input, &>button
+    transition: 0.2s
+    box-sizing: border-box
+    background: #232335
+    border: 1px solid #252537
+    border-radius: 5px
+    margin: 5px
+    min-width: 40vw
+    max-width: 40vw
+    padding: 5px
+    display: block
+    color: #fff
+    &:focus
+      background: #272739
+      border: 1px solid #303042
+      outline: none
+  &>button:hover
+    background: #313143
+
+.Back::after
+  content: " |"
+
+.questions-card
+  display: inline-flex
+  flex-direction: column
+  position: relative
+  padding: 10px
+  margin: 10px
+  transition: 0.2s
+  font-size: 11pt
+  border-radius: 4px
+  background: #232333
+  &>span
+    display: block
+  &:hover
+    transform: scale(1.05)
+  .delete-card
+    display: block
+    text-align: center
+    transition: 200ms
+    width: 100%
+    &:hover
+      color: #ff4a4a
