@@ -2,7 +2,7 @@ import {PageLayout} from '../components/layouts/PageLayout'
 import { useState } from 'react';
 import { useForm, FormProvider } from 'react-hook-form'
 import { services } from '../services'
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Stepper } from '../components/Stepper';
 import { UserInfo } from '../components/Testing/UserInfo';
 import { AnswerQuestions } from '../components/Testing/AnswerQuestions';
@@ -13,14 +13,15 @@ import { calcProgress } from '../utils/calcProgress'
 export const Testing = () => {
   const navigate = useNavigate()
   const methods = useForm()
+  const { testId } = useParams();
   const { handleSubmit } = methods
   const [progress, setProgress] = useState(calcProgress(0, 3));
   const [step, setStep] = useState(0)
   const [answers, setAnswers] = useState([])
 
-  //! КОСТЫЛЬ !//
+  //! DANGER CRINGE ZONE !//
   const onSubmit = (newTest) => {
-    let getQuestionAnswers = services.questions.fetchOne(answers.id)
+    let getQuestionAnswers = services.questions.fetchOne(testId)
     let grade = {correct: 0, total:0, grade: 0, title: ""}
     getQuestionAnswers.questions.map((question, index) => {
       if (question.answer-1 === answers.answers[index]){
@@ -37,12 +38,12 @@ export const Testing = () => {
     navigate('/testhistory')
 
   }
-  //! КОСТЫЛЬ !//
+
+  //! DANGER CRINGE ZONE !//
 
   const handleStepChange = (newStep) => {
     setStep(newStep)
     setProgress(calcProgress(newStep, 3))
-    console.log(step)
   }
 
   const onFinish = (result) => {
@@ -60,7 +61,7 @@ export const Testing = () => {
         <div className="creation-card">
           <Stepper value={step} onStepChange={handleStepChange} customButtons={step === 1 || step === 2}>
             <UserInfo/>
-            <AnswerQuestions onFinish={onFinish} />
+            <AnswerQuestions onFinish={onFinish}/>
             <FinishTest onSubmit={handleSubmit(onSubmit)}/>
           </Stepper>
         </div>

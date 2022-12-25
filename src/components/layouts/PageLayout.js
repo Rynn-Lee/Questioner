@@ -16,12 +16,12 @@ export const PageLayout = ({children, title, progress}) => {
 
 export const TestingLayout = ({children, progress, timeProgress}) => {
   const isProgress = typeof progress !== 'undefined'
-  const isTimeProgress = typeof timeProgress !== 'undefined'
+  // const isTimeProgress = typeof timeProgress !== 'undefined'
   return (
     <>
       {isProgress && <div style={{ width: `${progress}%` }} className="progress-bar-2" />}
+      {/* {isTimeProgress && <div style={{ width: `${timeProgress}%` }} className="progress-bar-3" />} */}
       <div>{children}</div>
-      {isTimeProgress && <div style={{ width: `${timeProgress}%` }} className="progress-bar-3" />}
     </>
   )
 }

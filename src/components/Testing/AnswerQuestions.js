@@ -1,18 +1,16 @@
 import { useEffect, useState } from 'react'
 import { useParams } from 'react-router-dom'
 import { services } from '../../services'
-import { calcProgress, calcTimeProgress } from '../../utils/calcProgress'
+import { calcProgress } from '../../utils/calcProgress'
 import { TestingLayout } from '../layouts/PageLayout'
 import { Stepper } from '../Stepper'
 
 
-export const AnswerQuestions = ({onFinish, onLol}) => {
+export const AnswerQuestions = ({onFinish, onEnter}) => {
   const [question, setQuestion] = useState()
   const [answers, setAnswers] = useState([])
-  const [timeLeft, setTimeLeft] = useState(0)
   const [step, setStep] = useState(0)
   const [progress, setProgress] = useState(0)
-  const [timeProgress, setTimeProgress] = useState(100)
   const { testId } = useParams();
 
   // const onSubmit = (data) => {
@@ -26,29 +24,12 @@ export const AnswerQuestions = ({onFinish, onLol}) => {
   
 
   useEffect(() => {
-    const test = services.questions.fetchOne(testId)
-    setProgress(calcProgress(step, test.questions.length))
+    const testing = services.questions.fetchOne(testId)
+    setProgress(calcProgress(step, testing.questions.length))
     // setProgress((step+1) * (100/test.questions.length))
-    setTimeLeft(test.time)
-    setQuestion(test)
-  }, [testId, step])
+    setQuestion(testing)
+  }, [testId, step, onEnter])
 
-
-  useEffect(() => {
-    let mounted = true
-
-    setTimeout(() => {
-      if(mounted){
-        if(timeLeft) setTimeLeft(timeLeft-1)
-        else console.log("DONE")
-        setTimeProgress(calcTimeProgress(question.time, timeLeft-1))
-        console.log(timeLeft)
-      }
-    }, 1000);
-
-    return() => mounted = false
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [timeLeft])
 
   // setInterval(() => {
   //   setTimeLeft(timeLeft - 1)
@@ -70,14 +51,13 @@ export const AnswerQuestions = ({onFinish, onLol}) => {
   }
 
   return (
-    <TestingLayout title="Тестирование" progress={progress} timeProgress={timeProgress} >
+    <TestingLayout title="Тестирование" progress={progress}>
       <Stepper value={step} customButtons>
         {
           question?.questions?.map((item, index) => {
             return(
               <div className='cards' key={index}>
-                <input className="counter question" value={`Время - ${timeLeft} | Вопросы - ${index+1} / ${question.questions.length}`} disabled />
-                <input type="button" className='question' placeholder="Вопрос" value={item.title} />
+                <input type="button" className='question' placeholder="Вопрос" value={`${index+1} / ${question.questions.length} - ${item.title}`} />
                 <button name="answer" className="counter answer" onClick={() => handleAnswer(0)}>{item.question[0]}</button>
                 <button name="answer" className="counter answer" onClick={() => handleAnswer(1)}>{item.question[1]}</button>
                 <button name="answer" className="counter answer" onClick={() => handleAnswer(2)}>{item.question[2]}</button>
