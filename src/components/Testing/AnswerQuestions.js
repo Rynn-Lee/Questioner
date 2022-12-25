@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react'
-import { set } from 'react-hook-form'
 import { useParams } from 'react-router-dom'
 import { services } from '../../services'
 import { calcProgress, calcTimeProgress } from '../../utils/calcProgress'
@@ -13,9 +12,7 @@ export const AnswerQuestions = ({onFinish, onLol}) => {
   const [timeLeft, setTimeLeft] = useState(0)
   const [step, setStep] = useState(0)
   const [progress, setProgress] = useState(0)
-  const [lol, lol2] = useState(0)
   const [timeProgress, setTimeProgress] = useState(100)
-
   const { testId } = useParams();
 
   // const onSubmit = (data) => {
@@ -50,7 +47,7 @@ export const AnswerQuestions = ({onFinish, onLol}) => {
     }, 1000);
 
     return() => mounted = false
-  }, [timeLeft])
+  }, [question.time, timeLeft])
 
   // setInterval(() => {
   //   setTimeLeft(timeLeft - 1)

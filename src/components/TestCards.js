@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom"
-
 const TestCards = ({id, correct, date, grade, group, name, title, total, deleteTest}) => {
   return(
     <div className="questions-card">

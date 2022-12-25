@@ -1,5 +1,3 @@
-import { Link } from "react-router-dom"
-
 export const FinishTest = ({onSubmit}) => {
   return (
     <div className="cards">

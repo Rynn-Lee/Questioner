@@ -1,6 +1,6 @@
 import {PageLayout} from '../components/layouts/PageLayout'
-import { useEffect, useState } from 'react';
-import { useForm, FormProvider, useWatch } from 'react-hook-form'
+import { useState } from 'react';
+import { useForm, FormProvider } from 'react-hook-form'
 import { services } from '../services'
 import { useNavigate } from 'react-router-dom';
 import { Stepper } from '../components/Stepper';
@@ -22,7 +22,7 @@ export const Testing = () => {
   const onSubmit = (newTest) => {
     let getQuestionAnswers = services.questions.fetchOne(answers.id)
     let grade = {correct: 0, total:0, grade: 0, title: ""}
-    getQuestionAnswers.questions.map((question, index) => {
+    getQuestionAnswers.questions.foreach((question, index) => {
       if (question.answer-1 === answers.answers[index]){
         grade.correct += 1
       }
