@@ -27,6 +27,7 @@ export const Testing = () => {
         grade.correct += 1
       }
       grade.total += 1
+      return true
     })
     grade.title = getQuestionAnswers.title
     grade.grade = Math.floor((grade.correct / grade.total)*100)

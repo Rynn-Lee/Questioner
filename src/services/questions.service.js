@@ -52,6 +52,64 @@ const PreparedQuestions = [
         answer: 1
       }
     ]
+  },
+  {
+  "title": "React.js",
+  "time": "1230",
+  "questions": [
+      {
+          "title": "Для чего нужен ServiceWorker",
+          "question": [
+              "Для Progressive Web App",
+              "Для Hyper-text markup language",
+              "Для JavaScript",
+              "Для всего"
+          ],
+          "answer": "1"
+      },
+      {
+          "title": "Для чего нужен Manifest.json",
+          "question": [
+              "Для указания путей",
+              "Для PAA",
+              "Для CSS",
+              "Нет верных ответов - Нет верных ответов"
+          ],
+          "answer": "4"
+      },
+      {
+          "title": "Основная фишка в React.js, отличная от чистого js",
+          "question": [
+              "Скорость",
+              "Простота",
+              "Компоненты",
+              "Консоль"
+          ],
+          "answer": "3"
+      },
+      {
+          "title": "Что используется для объявления состояния?",
+          "question": [
+              "useEffect",
+              "useState",
+              "useCallback",
+              "useForm"
+          ],
+          "answer": "2"
+      },
+      {
+          "title": "Как лучше объявлять переменные в реакте?",
+          "question": [
+              "const",
+              "let",
+              "var",
+              "string"
+          ],
+          "answer": "1"
+      }
+  ],
+  "id": 2,
+  "date": "25-12-2022"
   }
 ]
 

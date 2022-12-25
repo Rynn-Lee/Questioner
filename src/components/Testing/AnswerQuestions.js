@@ -47,6 +47,7 @@ export const AnswerQuestions = ({onFinish, onLol}) => {
     }, 1000);
 
     return() => mounted = false
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [timeLeft])
 
   // setInterval(() => {
