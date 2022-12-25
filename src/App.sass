@@ -4,7 +4,8 @@ body
   padding: 0px
   color: #fff
   font:
-    size: calc(var(--index) / 1)
+    // size: calc(var(--index) / 1)
+    font-size: 15pt
     family: monospace
 
 $theme: #ff9e5e
@@ -15,9 +16,16 @@ hr
   width: 100%
   border: 1px solid $theme
 
+a
+  color: #ccc
+  text-decoration: none
+
+ol
+  margin: 0px 0px 0px 25px
+  padding: 0px 0px 0px 15px
+
 .fa
   margin-left: 8px
-  font-size: calc(var(--index) / 1.15)
 
 .App
   display: flex
@@ -25,8 +33,11 @@ hr
 
 :root
   --index: calc(1vw+1vh)
+  --progress-bar: 0%
+  --progress-bar2: 0%
 
 .sidebar
+  z-index: 101
   display: flex
   flex-direction: column
   justify-content: space-between
@@ -34,7 +45,7 @@ hr
   left: 0px
   top: 0px
   width: 100px
-  height: 100vh
+  height: 100%
   background: #191929
   text-align: center
 
@@ -44,6 +55,9 @@ hr
   padding: 20px
   &:hover
     color: $theme
+
+.counter
+  text-align: center
 
 .buttons
   display: flex
@@ -58,6 +72,9 @@ hr
     &:hover
       background: #242435
       color: $theme
+    & .fa
+      // font-size: calc(var(--index) / 0.8)
+      font-size: 15pt
 
 
 .about
@@ -65,45 +82,65 @@ hr
   transition: 0.2s
   &:hover
     background: #242435
+    color: $theme
 
 .content-wrapper
-  position: fixed
+  position: absolute
   display: flex
   left: 100px
   right: 0px
   flex-direction: column
 
 .page-title
+  z-index: 100
+  position: fixed
+  left: 100px
   padding: 15px
-  left: 0px
   right: 0px
   font-size: 12pt
   text-align: center
   background: #191929
+.extended
+  padding: 15px 0px 0px 0px
 
 .content
+  top: 60px
+  position: relative
   padding: 15px
   left: 0px
   right: 0px
 
 .create-content
+  position: relative
+  top: 25px
   display: flex
   justify-content: center
   justify-items: center
-  vertical-align: middle
   padding: 10px
 
 .horizontal
   display: flex
   flex-direction: row
 
+.horizontal2
+  display: flex
+  width: 100%
+  .steps
+    width: 100%
+
 
 .creation-card
+  top: 60px
+  display: inline-table
+  position: fixed
   padding: 15px
+  height: auto
   background: #191929
   border-radius: 3px
+  max-width: 40vw
   text-align: center
-  &>input, &>button
+  overflow: hidden
+  & input, & button
     transition: 0.2s
     box-sizing: border-box
     background: #232335
@@ -121,9 +158,65 @@ hr
       outline: none
   &>button:hover
     background: #313143
+  a
+    display: inline-block
+    width: 93.5%
+    
+.cards
+  position: relative
+  height: 100%
+  display: block
+  .answer
+    transition: 200ms
+    &:hover
+      background: #303042
+      cursor: pointer
+  .question
+      background: #303042
+  
 
 .Back::after
   content: " |"
+
+.progress-bar
+  width: 50%
+  height: 3px
+  transition: 300ms
+  background: $theme
+  margin: 12px 0px 0px 0px
+
+.progress-bar-2
+  width: 50%
+  height: 3px
+  transition: 300ms
+  background: lightgreen
+  margin: 0px 0px 0px 0px
+  border-radius: 20px
+
+.progress-bar-3
+  width: 50%
+  height: 3px
+  transition: 300ms
+  background: aqua
+  margin: 10px 0px 0px 0px
+  border-radius: 20px
+
+.steps
+  text-align: center
+  cursor: pointer
+  width: 50%
+  padding: 8px
+  margin: 0px 5px 0px 5px
+  transition: 300ms
+  font-size: 11pt
+  user-select: none
+  border-radius: 5px
+  border: 1px solid #272739
+  background: #272739
+  &:hover
+    border: 1px solid #303042
+    background: #303042
+
 
 .questions-card
   display: inline-flex
@@ -131,18 +224,62 @@ hr
   position: relative
   padding: 10px
   margin: 10px
+  max-width: 500px
   transition: 0.2s
   font-size: 11pt
+  line-height: 20px
   border-radius: 4px
-  background: #232333
+  background: #202031
   &>span
     display: block
   &:hover
-    transform: scale(1.05)
+    transform: scale(1.03)
   .delete-card
     display: block
     text-align: center
     transition: 200ms
     width: 100%
+    color: #fff
+    cursor: pointer
     &:hover
       color: #ff4a4a
+  .truncate
+    white-space: nowrap
+    overflow: hidden
+    text-overflow: ellipsis
+
+.existingQ
+  justify-content: space-between
+  padding: 5px
+  margin: 5px
+  text-align: left
+  font-size: 11pt
+  line-height: 25px
+  border-radius: 5px
+  background: #232333
+  .fa
+    padding: 4px
+    transition: 200ms
+  .fa-trash:hover
+      color: #ff4a4a
+      cursor: pointer
+
+.scrollwrapper
+  position: inherit
+  margin: 5px
+  overflow-y: auto
+  border-radius: 10px
+  max-height: 55vh
+
+
+::-webkit-scrollbar 
+  width: 5px
+/* Track */
+::-webkit-scrollbar-track 
+  background: #222232
+  border-radius: 10px
+/* Handle */
+::-webkit-scrollbar-thumb 
+  background: #404050
+  border-radius: 10px
+  

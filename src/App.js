@@ -1,41 +1,23 @@
-import { createContext, useContext, useEffect, useState } from 'react';
 import './App.sass';
-import { Create } from './components/Create';
-import { Show } from './components/Show';
+import { Create } from './pages/Create';
+import { Show } from './pages/Show';
 import { Sidebar } from './components/Sidebar';
-import { Test } from './components/TestHistory';
-import { DBservice } from './api/DataStorage'
-import { About } from './components/About';
+import { TestHistory } from './pages/TestHistory';
+import { About } from './pages/About';
+import {Routes, Route} from 'react-router-dom'
+import { Testing } from './pages/Testing';
 
-export const pageHandler = createContext()
-
-function PageRender(props){
-  const pageName = props.page;
-  switch(pageName){
-    case "Create": return <Create />;
-    case "Show": return <Show />;
-    case "Test": return <Test />;
-    case "About": return <About />;
-    default: return <Show />
-  }
-}
-
-function App() {
-  const [step, setStep] = useState(1)
-  const [page, setPage] = useState("Create")
-  const [questionsList, setQuestionsList] = useState([])
-  const [addQuestion, setAddQuestion] = useState([])
-
-  useEffect(() => {
-    setQuestionsList(DBservice.fetchAll())
-  }, [])
-
+const App = () => {
   return (
     <div className="App">
-      <pageHandler.Provider value={{page, setPage, questionsList, setQuestionsList, step, setStep, addQuestion, setAddQuestion}}>
         <Sidebar />
-        <PageRender page={page} />
-      </pageHandler.Provider>
+        <Routes>
+          <Route index element={<Show />} />
+          <Route path="/create" element={<Create />} />
+          <Route path="/testhistory" element={<TestHistory />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/testing/:testId" element={<Testing />} />
+        </Routes>
     </div>
   );
 }

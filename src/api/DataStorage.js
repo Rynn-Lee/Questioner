@@ -4,6 +4,7 @@ const month = date.getMonth()+1
 const year = date.getFullYear()
 
 export const DBservice = {
+
   fetchAll(){
     if(!localStorage.getItem('questions')){
       localStorage.setItem('questions', JSON.stringify(PreparedQuestions))
@@ -22,21 +23,8 @@ export const DBservice = {
     localStorage.setItem('questions', JSON.stringify(filtered))
     this.fetchAll()
     console.log(filtered)
-  },
-  store(){
-    
   }
 }
-
-
-
-
-
-
-
-
-
-
 
 
 

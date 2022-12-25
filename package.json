@@ -8,8 +8,10 @@
     "@testing-library/user-event": "^13.2.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "react-hook-form": "^7.41.0",
+    "react-router-dom": "^6.6.0",
     "react-scripts": "5.0.1",
-    "sass": "^1.56.1"
+    "sass": "^1.57.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,7 +21,8 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app"
+      "react-app",
+      "react-app/jest"
     ]
   },
   "browserslist": {
@@ -33,9 +36,5 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
-  },
-  "devDependencies": {
-    "eslint-config-react": "^1.1.7",
-    "eslint-config-react-app": "^7.0.1"
   }
 }
