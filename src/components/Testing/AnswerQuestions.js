@@ -47,7 +47,7 @@ export const AnswerQuestions = ({onFinish, onLol}) => {
     }, 1000);
 
     return() => mounted = false
-  }, [question.time, timeLeft])
+  }, [timeLeft])
 
   // setInterval(() => {
   //   setTimeLeft(timeLeft - 1)

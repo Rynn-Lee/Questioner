@@ -22,7 +22,7 @@ export const Testing = () => {
   const onSubmit = (newTest) => {
     let getQuestionAnswers = services.questions.fetchOne(answers.id)
     let grade = {correct: 0, total:0, grade: 0, title: ""}
-    getQuestionAnswers.questions.foreach((question, index) => {
+    getQuestionAnswers.questions.map((question, index) => {
       if (question.answer-1 === answers.answers[index]){
         grade.correct += 1
       }
