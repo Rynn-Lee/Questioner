@@ -7,19 +7,19 @@ export const TestHistory = () => {
   const [tests, setTests] = useState([])
 
   useEffect(() => {
-    const Testings = services.questions.fetchTests()
+    const Testings = services.results.fetchResults()
     setTests(Testings)
   }, [])
 
-  const deleteTest = (id) => {
-    const filtered = services.questions.removeTest(id)
+  const deleteResult = (id) => {
+    const filtered = services.results.removeResult(id)
     setTests(filtered)
   }
 
   return(
-    <PageLayout title={`История тестирований: ${tests.length}`}>
+    <PageLayout title={`Testing history: ${tests.length}`}>
       {
-        tests.map((test) => {
+        tests.map((test, index) => {
           return(
             <TestCards
               key={test.id}
@@ -31,7 +31,7 @@ export const TestHistory = () => {
               name={test.name}
               title={test.title}
               total={test.total}
-              deleteTest = {deleteTest}
+              deleteTest = {deleteResult}
             />
           )
         }).reverse()

@@ -17,7 +17,7 @@ export const Show = () => {
   }
 
   return(
-    <PageLayout title={`Ваши тесты: ${questions.length}`}>
+    <PageLayout title={`Available tests: ${questions.length}`}>
       {
         questions.map((question) => {
           return(

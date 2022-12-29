@@ -89,7 +89,7 @@ export const Testing = ({handlenext}) => {
         <div className="creation-card">
           <Stepper >
             <div className="cards">
-              <input placeholder="Вопрос" className="counter" name="Title" value={`Ваша информация. После заполнения, сюда вернуться нельзя!`} disabled/>
+              <input placeholder="Вопрос" className="counter" name="Title" value={`Your info. You can't get back here later`} disabled/>
               <input placeholder="ФИО" className="inputField" name="Name" onChange={(e) => setStudent({...student, name: e.target.value})} required/>
               <input placeholder="Группа" className="inputField" onChange={(e) => setStudent({...student, group: e.target.value, testName: test.title})} required/>
             </div>
@@ -98,7 +98,7 @@ export const Testing = ({handlenext}) => {
               test.questions?.map((el, index) => {
                 return(
                   <div className="cards" key={index} onFocus={()=>{updateAnswerState('questionId', index)}}>
-                    <input placeholder="Вопрос" className="counter" name="Title" value={`Ответ на вопросы`} disabled/>
+                    <input placeholder="Question" className="counter" name="Title" value={`Answers on questions`} disabled/>
                     <div className='progress-bar-2'></div>
                     <input type="text" className="counter question" value={el.title} disabled/>
                     <input type="button" className="counter answer" value={el.answer1} onClick={(e)=>updateAnswerState('answer', e.target.value)}/>
@@ -110,8 +110,8 @@ export const Testing = ({handlenext}) => {
               })
             }</Quester>
             <div className='cards'>
-              <input placeholder="Вопрос" className="counter" name="Title" value={`Завершить тест?`} disabled/>
-              <Link to="/"><button className="steps">Завершить</button></Link>
+              <input placeholder="Вопрос" className="counter" name="Title" value={`Finish test?`} disabled/>
+              <Link to="/"><button className="steps">Finish</button></Link>
             </div>
           </Stepper>
         </div>

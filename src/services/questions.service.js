@@ -7,7 +7,7 @@ const PreparedQuestions = [
   {
     id: 0,
     title: "Fisrt test",
-    time: 120,
+    time: 12,
     date: `${day}-${month}-${year}`,
     questions: [
       {
@@ -30,7 +30,7 @@ const PreparedQuestions = [
   {
     id: 1,
     title: "Second test",
-    time: 180,
+    time: 5,
     date: `${day}-${month}-${year}`,
     questions: [
       {
@@ -55,7 +55,7 @@ const PreparedQuestions = [
   },
   {
   "title": "React.js",
-  "time": "1230",
+  "time": "15",
   "questions": [
       {
           "title": "Для чего нужен ServiceWorker",
@@ -122,24 +122,13 @@ export const questionsService = {
     const parsedstorage = JSON.parse(storage)
     return parsedstorage
   },
-  fetchOne(id){
-    const storage = localStorage.getItem('questions')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.find((el, index) => el.id === parseInt(id))
-    return filtered
-  },
-  remove(id){
-    const storage = localStorage.getItem('questions')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((questioner) => questioner.id !== id);
-    localStorage.setItem('questions', JSON.stringify(filtered))
-    return filtered
-  },
+
+
   addTest(newTest){
     const storage = localStorage.getItem('questions')
     let parsedstorage = JSON.parse(storage)
     newTest = JSON.parse(newTest)
-    const id = parsedstorage.length
+    const id = Math.floor(Math.random(10) * 10000)
     const additional = {
       id,
       date:`${day}-${month}-${year}`
@@ -148,35 +137,24 @@ export const questionsService = {
     parsedstorage.push(newTest)
     localStorage.setItem('questions', JSON.stringify(parsedstorage))
   },
-  addResult(result){
-    if(!localStorage.getItem('tests') || JSON.parse(localStorage.getItem('tests')).length === 0){
-      localStorage.setItem('tests', JSON.stringify([]))
-    }
-    const storage = localStorage.getItem('tests')
-    let parsedstorage = JSON.parse(storage)
-    result = JSON.parse(result)
-    const id = parsedstorage.length
-    const additional = {
-      id,
-      date:`${day}-${month}-${year}`
-    }
-    Object.assign(result, additional)
-    parsedstorage.push(result)
-    localStorage.setItem('tests', JSON.stringify(parsedstorage))
-  },
-  fetchTests(){
-    if(!localStorage.getItem('tests') || JSON.parse(localStorage.getItem('tests')).length === 0){
-      localStorage.setItem('tests', JSON.stringify([]))
-    }
-    const storage = localStorage.getItem('tests')
+
+
+  fetchOne(id){
+    const storage = localStorage.getItem('questions')
     const parsedstorage = JSON.parse(storage)
-    return parsedstorage
-  },
-  removeTest(id){
-    const storage = localStorage.getItem('tests')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((tester) => tester.id !== id);
-    localStorage.setItem('tests', JSON.stringify(filtered))
+    const filtered = parsedstorage.find((el, index) => el.id === parseInt(id))
     return filtered
-  }
+  },
+
+
+  remove(id){
+    const storage = localStorage.getItem('questions')
+    const parsedstorage = JSON.parse(storage)
+    const filtered = parsedstorage.filter((questioner) => questioner.id !== id);
+    localStorage.setItem('questions', JSON.stringify(filtered))
+    return filtered
+  },
+
+//TODO Сделать отдельный сервис для результатов
+//TODO Переименовать тесты в результаты
 }

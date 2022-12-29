@@ -20,15 +20,15 @@ export const QuestionsForm = () => {
 
   return (
     <div className="cards">
-      <input className="counter question" value={`Добавление вопросов | Вопросов - ${fields.length}`} disabled />
-      <input placeholder="Вопрос" {...register(`title`, { required: true } )} />
-      <input placeholder="Ответ 1" {...register(`question[0]`, { required: true } )} />
-      <input placeholder="Ответ 2" {...register(`question[1]`, { required: true } )} />
-      <input placeholder="Ответ 3" {...register(`question[2]`, { required: true } )} />
-      <input placeholder="Ответ 4" {...register(`question[3]`, { required: true } )} />
-      <input placeholder="Правильный ответ *номер поля (1-4)*" {...register(`answer`, { required: true } )} />
-      <button onClick={handleSubmit(onSubmit)} className="steps">Добавить вопрос</button><hr />
-      Созданные вопросы:
+      <input className="counter question" value={`Adding questions | Questions - ${fields.length}`} disabled />
+      <input placeholder="Question" autocomplete="off" {...register(`title`, { required: true } )} />
+      <input placeholder="Answer 1" autocomplete="off" {...register(`question[0]`, { required: true } )} />
+      <input placeholder="Answer 2" autocomplete="off" {...register(`question[1]`, { required: true } )} />
+      <input placeholder="Answer 3" autocomplete="off" {...register(`question[2]`, { required: true } )} />
+      <input placeholder="Answer 4" autocomplete="off" {...register(`question[3]`, { required: true } )} />
+      <input placeholder="Correct answer *field number (1-4)*" {...register(`answer`, { required: true } )} />
+      <button onClick={handleSubmit(onSubmit)} className="steps">Add a question</button><hr />
+      Created questions:
       <div className="scrollwrapper"><div className="scrollExistingQ"></div>
         {
           fields.map((field, index) => {

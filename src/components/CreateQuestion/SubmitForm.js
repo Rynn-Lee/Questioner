@@ -1,8 +1,8 @@
 export const SumbitForm = ({onSubmit}) => {
   return (
     <div className="cards">
-      <input placeholder="Вопрос" className="counter" name="Title" value={`Уверены что хотите завершить создание теста?`} disabled />
-      <button onClick={onSubmit} className="steps">Завершить создание теста</button>
+      <input placeholder="Question" className="counter" name="Title" value={`Are you sure you want to complete?`} disabled />
+      <button onClick={onSubmit} className="steps">Complete test creating</button>
     </div>
   )
 }

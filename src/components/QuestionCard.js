@@ -13,7 +13,7 @@ const QuestionCard = ({id, deleteTest, title, time, questions, date}) => {
     return(
       <div className="questions-card">
         <div className="truncate"><span className="theme"><i className="fa-solid fa-pen-to-square"></i> - {title}</span></div>
-        <div><span className="theme"><i className="fa-regular fa-clock"></i> - </span> {time} секунд</div>
+        <div><span className="theme"><i className="fa-regular fa-clock"></i> - </span> {time} seconds</div>
         <div><span className="theme"><i className="fa-regular fa-circle-question"></i> - </span> {questions.length}</div>
         <div><span className="theme"><i className="fa-solid fa-calendar-days"></i> - </span> {date}</div><hr />
         <div className="horizontal">

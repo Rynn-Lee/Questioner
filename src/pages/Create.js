@@ -25,26 +25,6 @@ export const Create = () => {
     services.questions.addTest(JSON.stringify(newTest))
     navigate('/')
   }
-
-  // useEffect(() => {
-  //   const DB = services.questions.fetchAll()
-  //   const unsubscribe = subscribeOnNewMessages((message) => {
-  //     setMessage(message)
-  //   })
-  //TODO-----------------------------------------------
-  //   return () => {
-  //     unsubscribe()
-  //   }
-  //TODO-----------------------------------------------
-  // }, [])
-
-  // useEffect(() => {
-  //   const handleMouseEnter = () => console.log('mouse click')
-  //   window.addEventListener('click', handleMouseEnter)
-  //   return () => {
-  //     window.removeEventListener('click', handleMouseEnter)
-  //   }
-  // }, [])
   
   const handleStepChange = (newStep) => {
     setStep(newStep)
@@ -67,15 +47,15 @@ export const Create = () => {
   }
 
   return (
-    <PageLayout title="Создание теста" progress={progress}>
+    <PageLayout title="Test creating" progress={progress}>
       <div className="create-content">
       <FormProvider {...methods}>
         <div className="creation-card">
           <Stepper value={step}
             customButtons={
               <>
-                <span className="steps" onClick={handleBack}>Вернуться назад</span>
-                <span className="steps" onClick={handleNext}>Следующий шаг</span>
+                <span className="steps" onClick={handleBack}>Previous step</span>
+                <span className="steps" onClick={handleNext}>Next step</span>
               </>
             }
           >

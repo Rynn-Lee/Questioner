@@ -5,7 +5,7 @@ const TestCards = ({id, correct, date, grade, group, name, title, total, deleteT
       <div><span className="theme"><i className="fa-solid fa-graduation-cap"></i> - </span> {name}</div>
       <div><span className="theme"><i className="fa-solid fa-users-rectangle"></i> - </span> {group}</div>
       <div><span className="theme"><i className="fa-solid fa-calendar-days"></i> - </span> {date}</div><hr />
-      <div><span className="theme"><i className="fa-solid fa-microscope"></i> - </span> {correct} из {total} правильно | {grade} баллов</div><hr />
+      <div><span className="theme"><i className="fa-solid fa-microscope"></i> - </span> {correct} out of {total} correct | Score: {grade}</div><hr />
       <div className="horizontal">
         <span className="delete-card theme" onClick={() => deleteTest(id)}><i className="fa-solid fa-trash"></i></span>
       </div>

@@ -5,9 +5,9 @@ export const UserInfo = () => {
 
   return (
     <div className="cards">
-      <input placeholder="Вопрос" className="counter" name="Title" value="Ваша информация" disabled />
-      <input placeholder="Имя" className="inputField" {...register('name')} />
-      <input placeholder="Группа" className="inputField" {...register('group')} />
+      <input placeholder="Question" className="counter" name="Title" value="Your info" disabled />
+      <input placeholder="Name" className="inputField" autocomplete="off" {...register('name')} />
+      <input placeholder="Group" className="inputField" autocomplete="off" {...register('group')} />
     </div>
   )
 }
