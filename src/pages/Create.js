@@ -1,5 +1,5 @@
 import {PageLayout} from '../components/layouts/PageLayout'
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useForm, FormProvider, useWatch } from 'react-hook-form'
 import { services } from '../services'
 import { useNavigate } from 'react-router-dom';
@@ -7,11 +7,18 @@ import { StartForm } from '../components/CreateQuestion/StartForm';
 import { QuestionsForm } from '../components/CreateQuestion/QuestionForm';
 import { SumbitForm } from '../components/CreateQuestion/SubmitForm';
 import { Stepper } from '../components/Stepper';
-import { calcProgress } from '../utils/calcProgress'
+import { calcProgress } from '../utils/calcProgress';
 
 
 export const Create = () => {
   const navigate = useNavigate()
+
+  useEffect(() => {
+    const account = services.account.checkSession()
+    !account && navigate("/")
+  }, [navigate])
+
+  
   const methods = useForm()
   const values = useWatch({
     control: methods.control

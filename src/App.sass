@@ -46,9 +46,13 @@ ol
   left: 0px
   top: 0px
   width: 100px
+  word-break: break-all
   height: 100%
   background: #191929
   text-align: center
+
+.btn
+  padding: 10px
 
 .logo
   transition: 0.2s
@@ -264,6 +268,29 @@ ol
   .fa-trash:hover
       color: #ff4a4a
       cursor: pointer
+
+.login-div
+  z-index: 1000
+  position: fixed
+  left: 0px
+  top: 0px
+  width: 100vw
+  height: 100vh
+  background: #101010f0
+  display: flex
+  justify-content: space-evenly
+  text-align: center
+  align-items: center
+  color: #fff
+  box-sizing: border-box
+  & input, button
+    color: #fff
+    display: flex
+    background: #29292950
+    padding: 10px
+    border: none
+    border-radius: 10px
+    margin: 10px 0px 0px 0px
 
 .scrollwrapper
   position: inherit
