@@ -15,7 +15,7 @@ export const RegisterForm = () => {
       group: formResults['group'].value
     }
     const requestReturn = services.account.register(requestQuery)
-    requestReturn === true ? navigate('/show') : formResults['status'].value = requestReturn
+    requestReturn === true ? navigate('/') : formResults['status'].value = requestReturn
   }
 
 

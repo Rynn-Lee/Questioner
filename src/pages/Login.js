@@ -15,7 +15,7 @@ export const Login = () => {
 
   const logout = () => {
     services.account.logout()
-    navigate('/show')
+    navigate('/')
   }
 
   if(!account){

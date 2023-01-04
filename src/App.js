@@ -13,8 +13,8 @@ const App = () => {
     <div className="App">
         <Sidebar />
         <Routes>
-          <Route index element={<Login />} />
-          <Route path="/show" element={<Show />} />
+          <Route index element={<Show />} />
+          <Route path="/login" element={<Login />} />
           <Route path="/create" element={<Create />} />
           <Route path="/testhistory" element={<TestHistory />} />
           <Route path="/about" element={<About />} />

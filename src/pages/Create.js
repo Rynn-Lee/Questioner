@@ -15,7 +15,7 @@ export const Create = () => {
 
   useEffect(() => {
     const account = services.account.checkSession()
-    !account && navigate("/")
+    !account && navigate("/login")
   }, [navigate])
 
   

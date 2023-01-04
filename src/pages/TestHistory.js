@@ -2,9 +2,17 @@ import { useState, useEffect} from 'react'
 import {PageLayout} from '../components/layouts/PageLayout'
 import { services } from '../services'
 import TestCards from '../components/TestCards'
+import { useNavigate } from 'react-router-dom'
 
 export const TestHistory = () => {
   const [tests, setTests] = useState([])
+  const navigate = useNavigate()
+
+  useEffect(() => {
+    const account = services.account.checkSession()
+    !account && navigate("/login")
+  }, [navigate])
+
 
   useEffect(() => {
     const Testings = services.results.fetchResults()

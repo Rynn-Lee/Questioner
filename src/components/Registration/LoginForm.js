@@ -10,7 +10,7 @@ export const LoginForm = () => {
     e.preventDefault()
     const formResults = loginForm.current
     const requestReturn = services.account.login(formResults['login'].value, formResults['password'].value)
-    requestReturn === true ? navigate('/show') : formResults['status'].value = requestReturn
+    requestReturn === true ? navigate('/') : formResults['status'].value = requestReturn
   }
 
 

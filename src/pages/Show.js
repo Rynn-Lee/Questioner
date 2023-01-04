@@ -10,7 +10,7 @@ export const Show = () => {
 
   useEffect(() => {
     const account = services.account.checkSession()
-    !account && navigate("/")
+    !account && navigate("/login")
     const newQuestions = services.questions.fetchAll()
     setQuestions(newQuestions)
   }, [navigate])

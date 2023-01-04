@@ -36,6 +36,12 @@ export const Testing = () => {
   const [currentTest, setCurrentTest] = useState({})
   const [timeLeft, setTimeLeft] = useState(100)
   const [timeProgressBar, setTimeProgressBar] = useState(100)
+  
+  useEffect(() => {
+    const account = services.account.checkSession()
+    !account && navigate("/login")
+  }, [navigate])
+
 
   const onSubmit = (data) => {
     console.log("OnSubmit called")
