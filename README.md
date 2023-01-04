@@ -1,4 +1,4 @@
-# 🖊️ YoNotes
+# 🖊️ Questioner
 Designed to create your own tests. Uses localStorage for now<br>
 
 # 👓 Design
