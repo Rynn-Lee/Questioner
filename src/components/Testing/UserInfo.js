@@ -1,5 +1,3 @@
-import { useFormContext } from 'react-hook-form'
-
 export const UserInfo = ({currentTest}) => {
 
   return (
