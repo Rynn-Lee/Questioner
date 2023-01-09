@@ -12,6 +12,11 @@ body
 $theme: #ff9e5e
 .theme
   color: $theme
+  & a
+    transition: 200ms
+    color: #b892d6
+  &:hover a
+    color: #92d6ba
 
 hr
   width: 100%
@@ -26,7 +31,7 @@ ol
   padding: 0px 0px 0px 15px
 
 .fa
-  margin-left: 8px
+  margin: 0px 0px 5px 0px
 
 .App
   display: flex
@@ -50,6 +55,11 @@ ol
   height: 100%
   background: #191929
   text-align: center
+  & span
+    transition: 180ms
+    opacity: 0
+  &:hover span
+    opacity: 1
 
 .btn
   padding: 10px
@@ -81,9 +91,17 @@ ol
       // font-size: calc(var(--index) / 0.8)
       font-size: 15pt
 
+.historyWrapper
+  margin: 0px 0px 25px 0px
+
+.testHistory
+  margin-bottom: 5px
+  border-radius: 10px
+  text-align: center
+  font-size: 14pt
 
 .about
-  padding: 20px
+  padding: 0px 0px 30px 0px
   transition: 0.2s
   &:hover
     background: #242435

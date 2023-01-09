@@ -4,16 +4,16 @@ import { services } from '../services'
 import TestCards from '../components/TestCards'
 import { useNavigate } from 'react-router-dom'
 
-export const TestHistory = () => {
-  const [myResults, setMyResults] = useState([])
+export const MyTestsHistory = () => {
+  const [otherResults, setOtherResults] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
     const account = services.account.checkSession()
     if(!account) navigate("/login")
     else{
-      const Testings = services.results.fetchResults(account.login)
-      setMyResults(Testings)
+      const otherTestings = services.results.fetchOtherResults(account.login)
+      setOtherResults(otherTestings)
     }
   }, [navigate])
 
@@ -22,15 +22,10 @@ export const TestHistory = () => {
     
   }, [])
 
-  const deleteResult = (id) => {
-    const filtered = services.results.removeResult(id)
-    setMyResults(filtered)
-  }
-
   return(
-    <PageLayout title={`My Testing History`}>
+    <PageLayout title={`My tests finished by others`}>
       {
-        myResults.map((test, index) => {
+        otherResults.map((test, index) => {
           return(
             <TestCards
               key={test.id}
@@ -44,8 +39,6 @@ export const TestHistory = () => {
               user={test.user}
               author={test.author}
               testid={test.testid}
-              deleteTest = {deleteResult}
-              mytest
             />
           )
         }).reverse()

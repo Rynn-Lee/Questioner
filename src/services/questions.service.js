@@ -1,3 +1,5 @@
+import { services } from "."
+
 const date = new Date()
 const day = date.getDate()
 const month = date.getMonth()+1
@@ -5,7 +7,7 @@ const year = date.getFullYear()
 
 const PreparedQuestions = [
   {
-    id: 0,
+    id: "0",
     title: "Fisrt test",
     time: 12,
     date: `${day}-${month}-${year}`,
@@ -28,7 +30,7 @@ const PreparedQuestions = [
     ]
   },
   {
-    id: 1,
+    id: "1",
     title: "Second test",
     time: 5,
     date: `${day}-${month}-${year}`,
@@ -108,30 +110,32 @@ const PreparedQuestions = [
           "answer": "1"
       }
   ],
-  "id": 2,
+  "id": "2",
   "date": "25-12-2022"
   }
 ]
 
 export const questionsService = {
-  fetchAll() {
+  fetchAll(user) {
     if(!localStorage.getItem('questions') || JSON.parse(localStorage.getItem('questions')).length === 0){
       localStorage.setItem('questions', JSON.stringify(PreparedQuestions))
     }
     const storage = localStorage.getItem('questions')
     const parsedstorage = JSON.parse(storage)
-    return parsedstorage
+    const filtered = parsedstorage.filter((test) => test.author === user);
+    return filtered
   },
-
 
   addTest(newTest){
     const storage = localStorage.getItem('questions')
+    const activeAccount = services.account.checkSession()
     let parsedstorage = JSON.parse(storage)
     newTest = JSON.parse(newTest)
-    const id = Math.floor(Math.random(10) * 10000)
+    const id = activeAccount.login + "_" + Math.floor(Math.random(10) * 999999)
     const additional = {
       id,
-      date:`${day}-${month}-${year}`
+      date:`${day}-${month}-${year}`,
+      author: activeAccount.login
     }
     Object.assign(newTest, additional)
     parsedstorage.push(newTest)
@@ -142,15 +146,15 @@ export const questionsService = {
   fetchOne(id){
     const storage = localStorage.getItem('questions')
     const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.find((el, index) => el.id === parseInt(id))
+    const filtered = parsedstorage.find((el, index) => el.id === id)
     return filtered
   },
 
 
-  remove(id){
+  remove(id, user){
     const storage = localStorage.getItem('questions')
     const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((questioner) => questioner.id !== id);
+    const filtered = parsedstorage.filter((questioner) => questioner.id !== id && questioner.author === user);
     localStorage.setItem('questions', JSON.stringify(filtered))
     return filtered
   },

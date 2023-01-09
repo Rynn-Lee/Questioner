@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom"
 
-const QuestionCard = ({id, deleteTest, title, time, questions, date}) => {
+const QuestionCard = ({id, deleteTest, title, time, questions, date, author}) => {
 
   //! FIX THIS SHIT LATER !//
   //TODO Do not show the card if it has no questions inside
@@ -12,13 +12,17 @@ const QuestionCard = ({id, deleteTest, title, time, questions, date}) => {
   else{
     return(
       <div className="questions-card">
-        <div className="truncate"><span className="theme"><i className="fa-solid fa-pen-to-square"></i> - {title}</span></div>
-        <div><span className="theme"><i className="fa-regular fa-clock"></i> - </span> {time} seconds</div>
-        <div><span className="theme"><i className="fa-regular fa-circle-question"></i> - </span> {questions.length}</div>
-        <div><span className="theme"><i className="fa-solid fa-calendar-days"></i> - </span> {date}</div><hr />
+        <Link to={`/testing/${id}`}>
+          <div className="truncate"><span className="theme"><i className="fa-solid fa-pen-to-square"></i> Title - {title}</span></div>
+          <div><span className="theme"><i className="fa-regular fa-clock"></i> Time - </span> {time} seconds</div>
+          <div><span className="theme"><i className="fa-regular fa-circle-question"></i> Questions - </span> {questions.length}</div>
+          <div><span className="theme"><i className="fa-solid fa-calendar-days"></i> Date - </span> {date}</div><hr />
+          <div><span className="theme"><i className="fa-solid fa-calendar-days"></i> Author - </span> {author}</div>
+          <div><span className="theme"><i className="fa-solid fa-calendar-days"></i> Test ID - </span> {id}</div><hr />
+        </Link>
         <div className="horizontal">
           <span className="delete-card theme" onClick={() => deleteTest(id)}><i className="fa-solid fa-trash"></i></span>
-          <Link to={`/testing/${id}`} className="delete-card theme"><i className="fa-solid fa-graduation-cap"></i></Link>
+          {/* <Link to={`/testing/${id}`} className="delete-card theme"><i className="fa-solid fa-graduation-cap"></i></Link> */}
         </div>
       </div>
     )

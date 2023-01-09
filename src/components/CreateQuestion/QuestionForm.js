@@ -21,11 +21,11 @@ export const QuestionsForm = () => {
   return (
     <div className="cards">
       <input className="counter question" value={`Adding questions | Questions - ${fields.length}`} disabled />
-      <input placeholder="Question" autocomplete="off" {...register(`title`, { required: true } )} />
-      <input placeholder="Answer 1" autocomplete="off" {...register(`question[0]`, { required: true } )} />
-      <input placeholder="Answer 2" autocomplete="off" {...register(`question[1]`, { required: true } )} />
-      <input placeholder="Answer 3" autocomplete="off" {...register(`question[2]`, { required: true } )} />
-      <input placeholder="Answer 4" autocomplete="off" {...register(`question[3]`, { required: true } )} />
+      <input placeholder="Question" autoComplete="off" {...register(`title`, { required: true } )} />
+      <input placeholder="Answer 1" autoComplete="off" {...register(`question[0]`, { required: true } )} />
+      <input placeholder="Answer 2" autoComplete="off" {...register(`question[1]`, { required: true } )} />
+      <input placeholder="Answer 3" autoComplete="off" {...register(`question[2]`, { required: true } )} />
+      <input placeholder="Answer 4" autoComplete="off" {...register(`question[3]`, { required: true } )} />
       <input placeholder="Correct answer *field number (1-4)*" {...register(`answer`, { required: true } )} />
       <button onClick={handleSubmit(onSubmit)} className="steps">Add a question</button><hr />
       Created questions:

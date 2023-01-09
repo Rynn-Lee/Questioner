@@ -9,7 +9,7 @@ import { AnswerQuestions } from '../components/Testing/AnswerQuestions';
 import { FinishTest } from '../components/Testing/FinishTest';
 import { calcProgress, calcTimeProgress } from '../utils/calcProgress'
 
-const getResults = (test, answers) => {
+const getResults = (test, answers, user) => {
   const total = test.questions.length
   const correct = test.questions.reduce((acc, question, index) => {
     if (question.answer - 1 === answers[index]) return acc + 1
@@ -20,7 +20,10 @@ const getResults = (test, answers) => {
     title: test.title,
     total,
     correct,
-    grade: Math.floor((correct / total) * 100)
+    grade: Math.floor((correct / total) * 100),
+    ...user,
+    author: test.author,
+    testid: test.id,
   }
 }
 // https://youtu.be/novnyCaa7To
@@ -35,28 +38,29 @@ export const Testing = () => {
   const [answers, setAnswers] = useState([])
   const [currentTest, setCurrentTest] = useState({})
   const [timeLeft, setTimeLeft] = useState(100)
+  const [user, setUser] = useState({})
   const [timeProgressBar, setTimeProgressBar] = useState(100)
   
   useEffect(() => {
     const account = services.account.checkSession()
-    !account && navigate("/login")
+    if(!account) navigate("/login")
+    else{
+      setUser({user: account.login, group: account.group})
+    }
   }, [navigate])
 
 
   const onSubmit = (data) => {
     console.log("OnSubmit called")
-    console.log(data)
-    const results = getResults(currentTest, answers)
-    console.log(answers)
-    console.log(results)
+    const results = getResults(currentTest, answers, user)
     services.results.addResult({...data, ...results})
     navigate('/testhistory')
   }
 
   useEffect(()=>{
-    setCurrentTest(services.questions.fetchOne(testId))
-    console.log("test's been set")
-  }, [testId])
+    const getTest = services.questions.fetchOne(testId)
+    getTest ? setCurrentTest(getTest) : navigate('/error')
+  }, [navigate, testId])
 
   useEffect(()=>{
     setTimeLeft(currentTest.time)
@@ -91,7 +95,7 @@ export const Testing = () => {
       <FormProvider {...methods}>
         <div className="creation-card">
           <Stepper value={step} onStepChange={handleStepChange} customButtons={step === 1 || step === 2} timeProgressBar={timeProgressBar}>
-            <UserInfo/>
+            <UserInfo currentTest={currentTest}/>
             <AnswerQuestions onFinish={onFinish} currentTest={currentTest} onSubmit={handleSubmit(onSubmit)} timeLeftPass={currentTest.time}/>
             <FinishTest onSubmit={handleSubmit(onSubmit)} />
           </Stepper>

@@ -34,7 +34,7 @@ export const Login = () => {
           <div className="creation-card">
             Login: <span className="theme">{account.login}</span> <br />
             Group: <span className="theme">{account.group}</span> <br />
-            <button onClick={()=>logout()} className="btn">Выйти</button>
+            <button onClick={()=>logout()} className="btn">Log out</button>
           </div>
       </div>
       </PageLayout>
