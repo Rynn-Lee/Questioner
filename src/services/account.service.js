@@ -2,7 +2,7 @@ import { services } from "."
 
 export const accountService = {
   checkSession(){
-    !localStorage.getItem("accounts") && localStorage.setItem("accounts", JSON.stringify(preparedAccount))
+    !localStorage.getItem("accounts") && localStorage.setItem("accounts", JSON.stringify([]))
     const result = sessionStorage.getItem("account")
     const parsedResult = JSON.parse(result)
     return parsedResult
@@ -40,8 +40,3 @@ export const accountService = {
     return true
   }
 }
-
-const preparedAccount = [{
-  login: "user",
-  password: "123123"
-}]

@@ -10,6 +10,13 @@ body
     family: monospace
 
 $theme: #ff9e5e
+$green: lightgreen
+$red: #ff4d4d
+
+.red
+  color: $red
+.green
+  color: $green
 .theme
   color: $theme
   & a
@@ -196,7 +203,25 @@ ol
       cursor: pointer
   .question
       background: #303042
-  
+
+.checkbox
+  display: flex
+  flex-direction: row
+  justify-content: flex-start
+  & input[type=checkbox]
+    min-width: 0px
+    width: 13px
+    height: 13px
+    padding: 0
+    top: 1px
+    margin: 5px 0px 0px 10px
+    vertical-align: bottom
+    position: relative
+    *overflow: hidden
+  & label
+    display: block
+    padding: 5px 0px 0px 15px
+    text-indent: -10px
 
 .Back::after
   content: " |"
@@ -240,6 +265,36 @@ ol
     border: 1px solid #303042
     background: #303042
 
+.searchBar
+  z-index: 10000
+  position: fixed
+  display: inline-block
+  background: #191929
+  left: 100px
+  padding: 0px
+  transition: 0.3s
+  &:hover
+    background: #232333
+  input, button
+    background: none
+    color: #fff
+    border: none
+    padding: 17px
+    &:focus-visible
+      outline: none
+
+    
+.createTest
+  max-width: max-content
+  display: flex
+  margin: 0px 0px 10px 10px
+  border-radius: 5px
+  padding: 5px
+  transition: 200ms
+  background: #232335
+  &:hover
+    background: #292939
+    
 
 .questions-card
   display: inline-flex
@@ -257,6 +312,7 @@ ol
     display: block
   &:hover
     transform: scale(1.03)
+    background: #242735
   .delete-card
     display: block
     text-align: center
@@ -266,6 +322,8 @@ ol
     cursor: pointer
     &:hover
       color: #ff4a4a
+  .share-card:hover
+      color: #4aaeff
   .truncate
     white-space: nowrap
     overflow: hidden

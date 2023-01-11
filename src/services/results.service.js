@@ -31,6 +31,9 @@ export const resultsService = {
   },
 
   fetchOtherResults(user){
+    if(!localStorage.getItem('results') || JSON.parse(localStorage.getItem('results')).length === 0){
+      localStorage.setItem('results', JSON.stringify([]))
+    }
     const storage = localStorage.getItem('results')
     const parsedstorage = JSON.parse(storage)
     const filtered = parsedstorage.filter((testResult) => testResult.author === user && testResult.user !== user);

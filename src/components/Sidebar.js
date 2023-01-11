@@ -16,10 +16,10 @@ export const Sidebar = () => {
     <div className="sidebar">
       <div className="logo">_RL<i className="fa fa-solid fa-code theme"></i></div>
       <div className="buttons">
-        <Link to="/" className="btn"><i className="fa fa-solid fa-clipboard-question"></i><br/><span>Tests</span></Link>
-        <Link to="/create" className="btn"><i className="fa fa-solid fa-plus"></i><br/><span>Create Test</span></Link>
-        <Link to="/testhistory" className="btn"><i className="fa fa-solid fa-clock-rotate-left"></i><br/><span>My History</span></Link>
-        <Link to="/mytest" className="btn"><i className="fa fa-solid fa-spell-check"></i><br/><span>My Tests</span></Link>
+        <Link to="/" className="btn"><i className="fa fa-solid fa-clipboard-question"></i><br/><span>My Tests</span></Link>
+        <Link to="/opentests" className="btn"><i className="fa fa-brands fa-wpexplorer"></i><br/><span>Open Tests</span></Link>
+        <Link to="/testhistory" className="btn"><i className="fa fa-solid fa-clock-rotate-left"></i><br/><span>My Results</span></Link>
+        <Link to="/mytest" className="btn"><i className="fa fa-solid fa-spell-check"></i><br/><span>Other results</span></Link>
         <Link to="/login" className="btn"><i className="fa fa-solid fa-user"></i><br /><span>{account.login}</span></Link>
       </div>
       <Link to="/about" className="about btn"><i className="fa fa fa-solid fa-eject"></i><br/><span>About</span></Link>

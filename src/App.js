@@ -9,6 +9,7 @@ import { Testing } from './pages/Testing';
 import { Login } from './pages/Login';
 import { ErrorPage } from './pages/ErrorPage';
 import { MyTestsHistory } from './pages/MyTestsHistory';
+import { OpenTests } from './pages/OpenTests';
 
 const App = () => {
   return (
@@ -17,6 +18,7 @@ const App = () => {
         <Routes>
           <Route index element={<Show />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/opentests" element={<OpenTests />} />
           <Route path="/error" element={<ErrorPage />} />
           <Route path="/create" element={<Create />} />
           <Route path="/testhistory" element={<TestHistory />} />
@@ -39,9 +41,17 @@ const App = () => {
 //* страница ошибки если нет такого теста
 //* отображение в тестах отдельно свои результаты, и результаты других
 //* разделить вкладку "Моя история" на "История моих тестирований" и "Выполнение моих тестов" 
-//TODO Добавить отображение какие вопросы отвечены правильно в результатах
-//TODO Открытие результата на всю страницу
-//TODO Сделать поисковую строку для ввода id теста
+//* Сделать поисковую строку для ввода id теста
+//* Перенести кнопку создания тестов во вкладку с тестами
+//todo Добавить в результаты статус теста open, отображение значка рядом
+//todo Сделать общедоступные тесты
+//todo Добавить отображение какие вопросы отвечены правильно в результатах
+//todo Открытие результата на всю страницу
+//todo Запрет на Share тестом
 
+
+//todo
+//!  ПЕРЕПИСАТЬ API С localStorage на SupaBase/FireBase  !//
+//todo
 
 export default App;
