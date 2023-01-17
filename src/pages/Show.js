@@ -26,11 +26,11 @@ export const Show = () => {
 
   const shareTest = (id) => {
     navigator.clipboard.writeText(id);
-    alert("Copied the text: " + id);
+    // alert("Copied the text: " + id);
   }
 
   return(
-    <PageLayout title={`Tests Available: ${questions.length}`} showtests>
+    <PageLayout title={`Tests Available: ${questions.length}`}>
       <div className='createTest'>
         <Link to="/create" className="btn"><i className="fa-solid fa-plus"></i> <span>Create New Test</span></Link>
       </div>

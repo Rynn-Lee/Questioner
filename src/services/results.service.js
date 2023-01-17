@@ -40,11 +40,12 @@ export const resultsService = {
     return filtered
   },
 
-  removeResult(id){
+  removeResult(id, login){
     const storage = localStorage.getItem('results')
     const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((tester) => tester.id !== id);
-    localStorage.setItem('results', JSON.stringify(filtered))
-    return filtered
+    const filteredDelete = parsedstorage.filter((result) => result.id !== id);
+    localStorage.setItem('results', JSON.stringify(filteredDelete))
+    const filteredByUser = filteredDelete.filter((result) => login === result.user);
+    return filteredByUser
   }
 }

@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom'
 
 export const TestHistory = () => {
   const [myResults, setMyResults] = useState([])
+  const [account, setAccount] = useState([])
   const navigate = useNavigate()
 
   useEffect(() => {
@@ -13,6 +14,7 @@ export const TestHistory = () => {
     if(!account) navigate("/login")
     else{
       const Testings = services.results.fetchResults(account.login)
+      setAccount(account)
       setMyResults(Testings)
     }
   }, [navigate])
@@ -23,7 +25,7 @@ export const TestHistory = () => {
   }, [])
 
   const deleteResult = (id) => {
-    const filtered = services.results.removeResult(id)
+    const filtered = services.results.removeResult(id, account.login)
     setMyResults(filtered)
   }
 
