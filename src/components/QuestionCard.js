@@ -21,7 +21,7 @@ const QuestionCard = ({id, deleteTest, title, time, questions, date, author, sha
           <div><span className="theme"><i className="fa-solid fa-user"></i> Test ID - </span> {id}</div><hr />
         </Link>
         <div className="horizontal">
-          {deleteTest && <span className="delete-card theme" onClick={() => deleteTest(id)}><i className="fa-solid fa-trash"></i></span>}
+          {deleteTest && <span className="delete-card theme" onClick={() => deleteTest(id, author)}><i className="fa-solid fa-trash"></i></span>}
           <span className="delete-card share-card theme" onClick={() => shareTest(id)}><i className="fa-solid fa-arrow-up-right-from-square"></i></span>
         </div>
       </div>

@@ -40,9 +40,9 @@ export const questionsService = {
     return results.data[0]
   },
 
-  async remove(id){
+  async remove(id, user){
     await supabase.from('questions').delete().eq('testid', id)
-    return await this.fetchAll()
+    return await this.fetchAll(user)
   },
 
 //TODO Сделать отдельный сервис для результатов

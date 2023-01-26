@@ -27,10 +27,9 @@ export const Show = () => {
     }
   }, [navigate])
 
-  const deleteTest = useCallback(async (id) => {
+  const deleteTest = useCallback(async (id, author) => {
     setLoadingState(1)
-    const filtered = await services.questions.remove(id)
-    setQuestions(filtered)
+    setQuestions(await services.questions.remove(id, author))
     setLoadingState(0)
   }, [])
 
