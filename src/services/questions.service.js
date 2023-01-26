@@ -1,4 +1,5 @@
 import { services } from "."
+import { supabase } from "../client"
 
 const date = new Date()
 const day = date.getDate()
@@ -6,56 +7,42 @@ const month = date.getMonth()+1
 const year = date.getFullYear()
 
 export const questionsService = {
-  fetchAll(user) {
-    if(!localStorage.getItem('questions') || JSON.parse(localStorage.getItem('questions')).length === 0){
-      localStorage.setItem('questions', JSON.stringify([]))
-    }
-    const storage = localStorage.getItem('questions')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((test) => test.author === user);
-    return filtered
+  async fetchAll(user) {
+    const results = await supabase.from('questions').select().eq('author', user)
+    return results.data
   },
 
-  addTest(newTest){
-    const storage = localStorage.getItem('questions')
+  async addTest(newTest){
     const activeAccount = services.account.checkSession()
-    let parsedstorage = JSON.parse(storage)
     newTest = JSON.parse(newTest)
     const id = activeAccount.login + "_" + Math.floor(Math.random(10) * 999999)
     const additional = {
-      id,
+      testid: id,
       date:`${day}-${month}-${year}`,
       author: activeAccount.login
     }
-    Object.assign(newTest, additional)
-    parsedstorage.push(newTest)
-    localStorage.setItem('questions', JSON.stringify(parsedstorage))
-  },
-
-  fetchOpen(user){
-    if(!localStorage.getItem('questions') || JSON.parse(localStorage.getItem('questions')).length === 0){
-      localStorage.setItem('questions', JSON.stringify([]))
+    const newResult = {
+      ...newTest,
+      ...additional
     }
-    const storage = localStorage.getItem('questions')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((test) => test.open === true && test.author !== user);
-    return filtered
+    console.log(newResult)
+    await supabase.from('questions').insert(newResult)
+    return true
   },
 
-  fetchOne(id){
-    const storage = localStorage.getItem('questions')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.find((el, index) => el.id === id)
-    return filtered
+  async fetchOpen(user){
+    const results = await supabase.from('questions').select().eq('open', true).neq('author', user)
+    return results.data
   },
 
+  async fetchOne(id){
+    const results = await supabase.from('questions').select().eq('testid', id)
+    return results.data[0]
+  },
 
-  remove(id, user){
-    const storage = localStorage.getItem('questions')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((questioner) => questioner.id !== id && questioner.author === user);
-    localStorage.setItem('questions', JSON.stringify(filtered))
-    return filtered
+  async remove(id){
+    await supabase.from('questions').delete().eq('testid', id)
+    return await this.fetchAll()
   },
 
 //TODO Сделать отдельный сервис для результатов

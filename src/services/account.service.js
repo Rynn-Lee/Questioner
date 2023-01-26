@@ -1,39 +1,27 @@
-import { services } from "."
+import { supabase } from '../client'
 
 export const accountService = {
   checkSession(){
-    !localStorage.getItem("accounts") && localStorage.setItem("accounts", JSON.stringify([]))
     const result = sessionStorage.getItem("account")
     const parsedResult = JSON.parse(result)
     return parsedResult
   },
-  login(login, password){
-    const result = localStorage.getItem("accounts")
-    const parsedResult = JSON.parse(result)
-    const filtered = parsedResult.find((account) => account.login === login)
-    if(!filtered) return "User not found"
-    else{
-      if(filtered.password !== password){
-        return "Incorrect password"
-      }
-      else{
-        sessionStorage.setItem("account", JSON.stringify(filtered))
-        return true
-      }
-    }
-  },
-  register(data){
-    const result = localStorage.getItem("accounts")
-    const parsedResult = JSON.parse(result)
-    const filtered = parsedResult.find((account) => account.login === data.login)
-    if(!filtered) {
-      localStorage.setItem("accounts", JSON.stringify([...parsedResult, data]))
-      services.account.login(data.login, data.password)
+  async login(login, password){
+    const result = await supabase.from('accounts').select().eq('login', login)
+    if(!result.data.length)
+      return "User doesn't exist!"
+    if(result.data[0].password !== password)
+      return "Password doesn't match!"
+    sessionStorage.setItem("account", JSON.stringify(result.data[0]));
       return true
-    }
-    else{
-      return "User already exists"
-    }
+  },
+  async register(data){
+    const result = await supabase.from('accounts').select().eq('login', data.login)
+    if(result.data.length) return "User already exists"
+
+    await supabase.from('accounts').insert(data)
+    sessionStorage.setItem("account", JSON.stringify(data));
+    return true
   },
   logout(){
     sessionStorage.clear()

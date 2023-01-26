@@ -1,37 +1,42 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useCallback} from 'react'
 import {PageLayout} from '../components/layouts/PageLayout'
 import { services } from '../services'
 import TestCards from '../components/TestCards'
 import { useNavigate } from 'react-router-dom'
+import { LoadingScreen } from '../components/LoadingScreen'
 
 export const TestHistory = () => {
   const [myResults, setMyResults] = useState([])
   const [account, setAccount] = useState([])
+  const [loadingState, setLoadingState] = useState(0)
   const navigate = useNavigate()
 
   useEffect(() => {
     const account = services.account.checkSession()
     if(!account) navigate("/login")
-    else{
-      const Testings = services.results.fetchResults(account.login)
-      setAccount(account)
-      setMyResults(Testings)
-    }
-  }, [navigate])
-
-
-  useEffect(() => {
-    
+    else fetchData(account.login)
+    setAccount(account)
   }, [])
 
-  const deleteResult = (id) => {
-    const filtered = services.results.removeResult(id, account.login)
+  const fetchData = useCallback(async (account) => {
+    setLoadingState(1)
+    const data = await services.results.fetchResults(account)
+    setLoadingState(0)
+    setMyResults(data);
+  }, [])
+
+  const deleteResult = useCallback(async (id) => {
+    setLoadingState(1)
+    const filtered = await services.results.removeResult(id, account.login)
+    setLoadingState(0)
     setMyResults(filtered)
-  }
+  }, [])
 
   return(
-    <PageLayout title={`My Testing History`}>
-      {
+    <>
+    {loadingState ? <LoadingScreen/> : false}
+    <PageLayout title={'My Testing History'}>
+      { 
         myResults.map((test, index) => {
           return(
             <TestCards
@@ -40,7 +45,7 @@ export const TestHistory = () => {
               date={test.date}
               grade={test.grade}
               group={test.group}
-              id={test.id}
+              id={test.testid}
               title={test.title}
               total={test.total}
               user={test.user}
@@ -52,6 +57,6 @@ export const TestHistory = () => {
           )
         }).reverse()
       }
-    </PageLayout>
+    </PageLayout></>
   )
 }

@@ -4,12 +4,12 @@ const QuestionCard = ({id, deleteTest, title, time, questions, date, author, sha
 
   //! FIX THIS SHIT LATER !//
   //TODO Do not show the card if it has no questions inside
-  if(questions.length === 0){
-    return deleteTest(id)
-  }
+  // if(questions.length === 0){
+  //   return deleteTest(id)
+  // }
   //! FIX THIS SHIT LATER !//
   
-  else{
+  // else{
     return(
       <div className="questions-card">
         <Link to={`/testing/${id}`}>
@@ -26,7 +26,7 @@ const QuestionCard = ({id, deleteTest, title, time, questions, date, author, sha
         </div>
       </div>
     )
-  }
+  // }
 }
 
 export default QuestionCard

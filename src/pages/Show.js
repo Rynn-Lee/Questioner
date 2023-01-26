@@ -1,28 +1,38 @@
-import { useState, useEffect} from 'react'
+import { useState, useEffect, useCallback} from 'react'
 import QuestionCard from '../components/QuestionCard'
 import {PageLayout} from '../components/layouts/PageLayout'
 import { services } from '../services'
 import { Link, useNavigate } from 'react-router-dom'
+import { LoadingScreen } from '../components/LoadingScreen'
 
 export const Show = () => {
   const [questions, setQuestions] = useState([])
   const [user, setUser] = useState({})
+  const [loadingState, setLoadingState] = useState(0)
   const navigate = useNavigate()
+
+  const fetchData = useCallback(async(account) => {
+    setLoadingState(1)
+    const results = await services.questions.fetchAll(account)
+    setQuestions(results)
+    setLoadingState(0)
+  }, [])
 
   useEffect(() => {
     const account = services.account.checkSession()
     if(!account) navigate("/login")
     else{
-      const newQuestions = services.questions.fetchAll(account.login)
-      setQuestions(newQuestions)
       setUser(account.login)
+      fetchData(account.login)
     }
   }, [navigate])
 
-  const deleteTest = (id) => {
-    const filtered = services.questions.remove(id, user)
+  const deleteTest = useCallback(async (id) => {
+    setLoadingState(1)
+    const filtered = await services.questions.remove(id)
     setQuestions(filtered)
-  }
+    setLoadingState(0)
+  }, [])
 
   const shareTest = (id) => {
     navigator.clipboard.writeText(id);
@@ -30,6 +40,8 @@ export const Show = () => {
   }
 
   return(
+    <>
+    {loadingState ? <LoadingScreen/> : false}
     <PageLayout title={`Tests Available: ${questions.length}`}>
       <div className='createTest'>
         <Link to="/create" className="btn"><i className="fa-solid fa-plus"></i> <span>Create New Test</span></Link>
@@ -39,7 +51,7 @@ export const Show = () => {
           return(
             <QuestionCard
               key={question.id}
-              id={question.id}
+              id={question.testid}
               title={question.title}
               time={question.time}
               date={question.date}
@@ -52,6 +64,6 @@ export const Show = () => {
           )
         }).reverse()
       }
-    </PageLayout>
+    </PageLayout></>
   )
 }

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 
-export const Stepper = ({ children, onStepChange, isOnTest, value, customButtons }) => {
+export const Stepper = ({ children, onStepChange, value, customButtons, loadingState }) => {
   const isValue = typeof value !== 'undefined'
   const [step, setStep] = useState(isValue ? value : 0)
   useEffect(() => {
@@ -24,7 +24,7 @@ export const Stepper = ({ children, onStepChange, isOnTest, value, customButtons
   return (
     <div>
       <div className="horizontal2">
-        {customButtons ? customButtons : (
+        {customButtons || loadingState ? customButtons : (
           <>
             <span className="steps" onClick={handleBack}>Previous step</span>
             <span className="steps" onClick={handleNext}>Next step</span>

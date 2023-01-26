@@ -1,5 +1,5 @@
 import {PageLayout} from '../components/layouts/PageLayout'
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { useForm, FormProvider, useWatch } from 'react-hook-form'
 import { services } from '../services'
 import { useNavigate } from 'react-router-dom';
@@ -28,10 +28,10 @@ export const Create = () => {
   const [step, setStep] = useState(0)
   const [progress, setProgress] = useState(calcProgress(step, 3))
 
-  const onSubmit = (newTest) => {
-    services.questions.addTest(JSON.stringify(newTest))
+  const onSubmit = useCallback(async(newTest) => {
+    await services.questions.addTest(JSON.stringify(newTest))
     navigate('/')
-  }
+  }, [])
   
   const handleStepChange = (newStep) => {
     setStep(newStep)

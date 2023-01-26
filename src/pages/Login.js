@@ -13,6 +13,7 @@ export const Login = () => {
     setAccount(services.account.checkSession())
   }, [])
 
+
   const logout = () => {
     services.account.logout()
     navigate('/')

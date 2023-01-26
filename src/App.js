@@ -49,6 +49,7 @@ const App = () => {
 //todo Открытие результата на всю страницу
 //todo Запрет на Share тестом
 
+//todo Поиск по результатам с фильтром
 
 //todo
 //!  ПЕРЕПИСАТЬ API С localStorage на SupaBase/FireBase  !//

@@ -1,51 +1,28 @@
-const date = new Date()
-const day = date.getDate()
-const month = date.getMonth()+1
-const year = date.getFullYear()
+import { supabase } from '../client'
 
 export const resultsService = {
-//TODO Сделать отдельный сервис для результатов
-//TODO Переименовать тесты в результаты
-  addResult(result, user){
-    if(!localStorage.getItem('results')) localStorage.setItem('results', JSON.stringify([]))
-    const storageResults = JSON.parse(localStorage.getItem('results'))
-    const id = Math.floor(Math.random(10) * 10000)
-
+  async addResult(result, user){
     const newResult = {
-      id,
-      date:`${day}-${month}-${year}`,
       ...result,
-      ...user
+      ...user,
+      date: new Date()
     }
-    localStorage.setItem('results', JSON.stringify([...storageResults, newResult]))
+    await supabase.from('results').insert(newResult)
+    return true
   },
 
-  fetchResults(user){
-    if(!localStorage.getItem('results') || JSON.parse(localStorage.getItem('results')).length === 0){
-      localStorage.setItem('results', JSON.stringify([]))
-    }
-    const storage = localStorage.getItem('results')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((testResult) => testResult.user === user);
-    return filtered
+  async fetchResults(user){
+    const results = await supabase.from('results').select().eq('user', user)
+    return results.data
   },
 
-  fetchOtherResults(user){
-    if(!localStorage.getItem('results') || JSON.parse(localStorage.getItem('results')).length === 0){
-      localStorage.setItem('results', JSON.stringify([]))
-    }
-    const storage = localStorage.getItem('results')
-    const parsedstorage = JSON.parse(storage)
-    const filtered = parsedstorage.filter((testResult) => testResult.author === user && testResult.user !== user);
-    return filtered
+  async fetchOtherResults(user){
+    const results = await supabase.from('results').select().eq('author', user).neq('user', user)
+    return results.data
   },
 
-  removeResult(id, login){
-    const storage = localStorage.getItem('results')
-    const parsedstorage = JSON.parse(storage)
-    const filteredDelete = parsedstorage.filter((result) => result.id !== id);
-    localStorage.setItem('results', JSON.stringify(filteredDelete))
-    const filteredByUser = filteredDelete.filter((result) => login === result.user);
-    return filteredByUser
+  async removeResult(id, login){
+    await supabase.from('results').delete().eq('testid', id)
+    return this.fetchResults(login);
   }
 }
