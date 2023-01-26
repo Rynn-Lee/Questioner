@@ -25,9 +25,9 @@ export const TestHistory = () => {
     setMyResults(data);
   }, [])
 
-  const deleteResult = useCallback(async (id) => {
+  const deleteResult = useCallback(async (id, account) => {
     setLoadingState(1)
-    const filtered = await services.results.removeResult(id, account.login)
+    const filtered = await services.results.removeResult(id, account)
     setLoadingState(0)
     setMyResults(filtered)
   }, [])
@@ -45,7 +45,7 @@ export const TestHistory = () => {
               date={test.date}
               grade={test.grade}
               group={test.group}
-              id={test.testid}
+              id={test.id}
               title={test.title}
               total={test.total}
               user={test.user}

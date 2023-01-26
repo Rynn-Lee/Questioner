@@ -13,7 +13,7 @@ const TestCards = (props) => {
       {props.mytest && <hr />}
       
       <div className="horizontal">
-       {props.mytest && <span className="delete-card theme" onClick={() => props.deleteTest(props.id)}><i className="fa-solid fa-trash"></i></span>}
+       {props.mytest && <span className="delete-card theme" onClick={() => props.deleteTest(props.id, props.user)}><i className="fa-solid fa-trash"></i></span>}
       </div>
     </div>
   )

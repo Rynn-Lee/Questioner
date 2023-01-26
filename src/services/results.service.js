@@ -22,7 +22,7 @@ export const resultsService = {
   },
 
   async removeResult(id, login){
-    await supabase.from('results').delete().eq('testid', id)
-    return this.fetchResults(login);
+    await supabase.from('results').delete().eq('id', id)
+    return await this.fetchResults(login);
   }
 }
