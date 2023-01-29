@@ -7,7 +7,6 @@ import { LoadingScreen } from '../components/LoadingScreen'
 
 export const Show = () => {
   const [questions, setQuestions] = useState([])
-  const [user, setUser] = useState({})
   const [loadingState, setLoadingState] = useState(0)
   const navigate = useNavigate()
 
@@ -22,10 +21,9 @@ export const Show = () => {
     const account = services.account.checkSession()
     if(!account) navigate("/login")
     else{
-      setUser(account.login)
       fetchData(account.login)
     }
-  }, [navigate])
+  }, [fetchData, navigate])
 
   const deleteTest = useCallback(async (id, author) => {
     setLoadingState(1)

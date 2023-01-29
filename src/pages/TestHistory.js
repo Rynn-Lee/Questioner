@@ -7,16 +7,8 @@ import { LoadingScreen } from '../components/LoadingScreen'
 
 export const TestHistory = () => {
   const [myResults, setMyResults] = useState([])
-  const [account, setAccount] = useState([])
   const [loadingState, setLoadingState] = useState(0)
   const navigate = useNavigate()
-
-  useEffect(() => {
-    const account = services.account.checkSession()
-    if(!account) navigate("/login")
-    else fetchData(account.login)
-    setAccount(account)
-  }, [])
 
   const fetchData = useCallback(async (account) => {
     setLoadingState(1)
@@ -24,6 +16,12 @@ export const TestHistory = () => {
     setLoadingState(0)
     setMyResults(data);
   }, [])
+
+  useEffect(() => {
+    const account = services.account.checkSession()
+    if(!account) navigate("/login")
+    else fetchData(account.login)
+  }, [fetchData, navigate])
 
   const deleteResult = useCallback(async (id, account) => {
     setLoadingState(1)
@@ -37,7 +35,7 @@ export const TestHistory = () => {
     {loadingState ? <LoadingScreen/> : false}
     <PageLayout title={'My Testing History'}>
       { 
-        myResults.map((test, index) => {
+        myResults.map((test) => {
           return(
             <TestCards
               key={test.id}

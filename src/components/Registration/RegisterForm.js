@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom"
 import { services } from "../../services"
 import md5 from 'md5-hash'
 
-export const RegisterForm = () => {
+export const RegisterForm = ({changeAction}) => {
   const loginForm = useRef()
   const navigate = useNavigate()
 
@@ -16,7 +16,7 @@ export const RegisterForm = () => {
     const requestQuery = {
       login: formResults['login'].value,
       password: md5(formResults['password'].value),
-      group: formResults['group'].value
+      email: formResults['email'].value
     }
 
     const requestReturn = await services.account.register(requestQuery)
@@ -30,11 +30,25 @@ export const RegisterForm = () => {
     <div className="login-form">
       <form ref={loginForm} onSubmit={handleLoginForm}>
         <label>Register form</label>
-        <input className="counter answer" name={'status'} value="Fill the fields" disabled/>
-        <input className="counter answer" autoComplete="off" name={'login'} placeholder="Login *" required/>
-        <input className="counter answer" autoComplete="off" name={'password'} placeholder="Password *" required/>
-        <input className="counter answer" autoComplete="off" name={'group'} placeholder="Group"/>
-        <button className="counter answer" name={'button'} type="submit">Register</button>
+        <div className="horizontal">
+          <input className="counter actionfield top-field" name={'status'} value="Register a new account" disabled/>
+        </div>
+        <div className="horizontal">
+          <input disabled value={"Login"} className="help-field"/>
+          <input autoComplete="off" name={'login'} placeholder="---"/>
+        </div>
+        <div className="horizontal">
+          <input disabled value={"Password"} className="help-field"/>
+          <input type="password" autoComplete="off" name={'password'} placeholder="---"/>
+        </div>
+        <div className="horizontal">
+          <input disabled value={"Email"} className="help-field"/>
+          <input autoComplete="off" name={'email'} placeholder="---"/>
+        </div>
+        <div className="horizontal3">
+          <button className="actionfield" name={'button'} type="submit">Register</button>
+          <button className="additional-action" type="button" onClick={changeAction}>I have an account</button>
+        </div>
       </form>
     </div>
   )

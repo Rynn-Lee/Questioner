@@ -8,22 +8,26 @@ import { services } from "../services"
 export const Login = () => {
   const navigate = useNavigate()
   const [account, setAccount] = useState({})
+  const [action, setAction] = useState(true)
 
   useEffect(()=> {
     setAccount(services.account.checkSession())
   }, [])
-
 
   const logout = () => {
     services.account.logout()
     navigate('/')
   }
 
+  const changeAction = () => setAction(!action)
+
   if(!account){
     return (
     <div className="login-div">
-      <LoginForm />
-      <RegisterForm />
+      {action ?
+        <LoginForm changeAction={changeAction} /> :
+        <RegisterForm changeAction={changeAction}/>
+      }
     </div>
     )
   }

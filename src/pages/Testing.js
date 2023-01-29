@@ -45,6 +45,13 @@ export const Testing = () => {
   const [timeProgressBar, setTimeProgressBar] = useState(100)
   const [loadingState, setLoadingState] = useState(0)
   
+  const fetchData = useCallback(async()=>{
+    setLoadingState(1)
+    const getTest = await services.questions.fetchOne(testId)
+    getTest ? setCurrentTest(getTest) : navigate('/error')
+    setLoadingState(0)
+  }, [navigate, testId])
+  
   useEffect(() => {
     const account = services.account.checkSession()
     if(!account) navigate("/login")
@@ -52,7 +59,7 @@ export const Testing = () => {
       setUser({user: account.login, group: account.group})
       fetchData()
     }
-  }, [navigate])
+  }, [fetchData, navigate])
 
   const onSubmit = (data) => {
     setLoadingState(1)
@@ -66,12 +73,6 @@ export const Testing = () => {
     setLoadingState(0)
   }, [navigate])
 
-  const fetchData = useCallback(async()=>{
-    setLoadingState(1)
-    const getTest = await services.questions.fetchOne(testId)
-    getTest ? setCurrentTest(getTest) : navigate('/error')
-    setLoadingState(0)
-  }, [navigate, testId])
 
   useEffect(()=>{
     setTimeLeft(currentTest.time)

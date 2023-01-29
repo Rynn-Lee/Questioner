@@ -10,8 +10,9 @@ body
     family: monospace
 
 $theme: #ff9e5e
-$green: lightgreen
+$green: #94f794
 $red: #ff4d4d
+$desaturatedOrange: #dfa16728
 
 .red
   color: $red
@@ -169,6 +170,11 @@ ol
 .horizontal
   display: flex
   flex-direction: row
+  .help-field
+    // background: rgba(50, 50, 50, 0.4)
+    background: $desaturatedOrange
+    width: 100px
+    border-radius: 10px 0px 0px 10px
 
 .horizontal2
   display: flex
@@ -176,6 +182,23 @@ ol
   .steps
     width: 100%
 
+.horizontal3
+  display: inline-flex
+  width: 100%
+  button
+    cursor: pointer
+    width: max-content !important
+    min-width: 120px
+  .additional-action
+    color: $theme
+    // margin-left: 10px
+    background: none
+    transition: 200ms
+    background: #29292950
+    // border-radius: 10px
+    &:hover
+      color: $green
+      
 
 .creation-card
   top: 60px
@@ -255,7 +278,7 @@ ol
   width: 100%
   height: 3px
   transition: 300ms
-  background: lightgreen
+  background: $green
   margin: 0px 0px 5px 0px
   border-radius: 20px
 
@@ -377,14 +400,26 @@ ol
   align-items: center
   color: #fff
   box-sizing: border-box
+  .login-form
+    width: 460px
   & input, button
     color: #fff
     display: flex
+    width: 100vw
     background: #29292950
     padding: 10px
     border: none
-    border-radius: 10px
+    border-radius: 0px 10px 10px 0px
     margin: 10px 0px 0px 0px
+  & .actionfield
+    background: $desaturatedOrange
+    border-radius: 10px 0px 0px 10px
+    transition: 200ms
+    &:hover
+      background: #49494950
+.top-field
+  border-radius: 10px !important
+    
 
 .scrollwrapper
   position: inherit

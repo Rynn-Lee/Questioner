@@ -31,7 +31,7 @@ export const Create = () => {
   const onSubmit = useCallback(async(newTest) => {
     await services.questions.addTest(JSON.stringify(newTest))
     navigate('/')
-  }, [])
+  }, [navigate])
   
   const handleStepChange = (newStep) => {
     setStep(newStep)
