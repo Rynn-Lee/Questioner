@@ -39,7 +39,7 @@ export const Show = () => {
   return(
     <>
     {loadingState ? <LoadingScreen/> : false}
-    <PageLayout title={`Tests Available: ${questions.length}`}>
+    <PageLayout title={`Tests Available: ${questions.length}`} showtests>
       <div className='createTest'>
         <Link to="/create" className="btn"><i className="fa-solid fa-plus"></i> <span>Create New Test</span><div /></Link>
       </div>

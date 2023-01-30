@@ -26,7 +26,7 @@ export const QuestionsForm = () => {
       <input placeholder="Answer 2" autoComplete="off" {...register(`question[1]`, { required: true } )} />
       <input placeholder="Answer 3" autoComplete="off" {...register(`question[2]`, { required: true } )} />
       <input placeholder="Answer 4" autoComplete="off" {...register(`question[3]`, { required: true } )} />
-      <input placeholder="Correct answer *field number (1-4)*" {...register(`answer`, { required: true } )} />
+      <input type="number" pattern='[0-4]' placeholder="Correct answer *field number (1-4)*" {...register(`answer`, { required: true } )} />
       <button onClick={handleSubmit(onSubmit)} className="steps">Add a question</button><hr />
       Created questions:
       <div className="scrollwrapper"><div className="scrollExistingQ"></div>
