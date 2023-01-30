@@ -1,4 +1,4 @@
-@media screen and (max-width: 900px) 
+@media screen and (max-width: 800px) 
   .sidebar
     flex-direction: row
     top: auto
@@ -10,6 +10,7 @@
     height: max-content
     justify-content: center
     align-content: center
+    border-top: 1px $theme solid
     & span
       display: none
   .buttons
@@ -31,36 +32,93 @@
     left: 0px
     right: 0px
   .content
-    top: 70px
+    top: 60px
+    margin-bottom: 125px
   .page-title
-    padding: 20px 0px 20px 0px
+    padding: 15px
     left: 0px
     right: 0px
+    border-bottom: 1px $theme solid
+  .extended
+    padding: 15px 0px 0px 0px
+    border-bottom: none
   .questions-card
     max-width: none
     position: relative
     display: flex
     left: 0px
     right: 0px
+  .create-content
+    top: 100px
+  .createTest 
+    display: flex
+    .btn
+      position: relative
+      left: 0px
+      width: 100%
+      right: 0px
   .creation-card
     display: flex
+    flex-direction: column
     max-width: none
     left: 0px
     right: 0px
-    height: 100vh
+    height: max-content
     box-sizing: border-box
+    input
+      max-width: none
+      left: 0px
+      right: 0px
+      margin: 0px
     .cards
-      input
-        // margin: px 0px 0px 0px
-        max-width: none
+      margin-top: 3px
+      display: flex
+      gap: 0px
+      flex-direction: column
+      .steps
+        position: relative
         width: 100%
+      input, button
+        margin: 3px 0px 3px 0px
+        max-width: none
         left: 0px
         right: 0px
   .searchBar
     display: flex
     justify-content: space-between
-    padding: 5px
-    left: -200px
+    padding: 0px
+    width: 100vw
+    left: -90vw
     &:hover
-      left: 0px
-      right: 0px
+      left: 0vw
+
+  .login-div
+    display: flex
+    justify-content: space-evenly
+    text-align: center
+    align-items: center
+    color: #fff
+    box-sizing: border-box
+    .login-form
+      width: 90vw
+    & input, button
+      color: #fff
+      display: flex
+      width: 100vw
+      background: #29292950
+      padding: 10px
+      border: none
+      border-radius: 0px 10px 10px 0px
+      margin: 10px 0px 0px 0px
+    & .actionfield
+      background: $desaturatedOrange
+      border-radius: 10px 0px 0px 10px
+      transition: 200ms
+      &:hover
+        background: #49494950
+  .top-field
+    border-radius: 10px !important
+  .questions-card
+    &:hover
+      background: #242735
+      transform: none
