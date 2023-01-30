@@ -1,32 +1,38 @@
-import { useRef } from "react"
+import { useCallback, useRef, useState } from "react"
 import { useNavigate } from "react-router-dom"
 import { services } from "../../services"
 import {classNames} from "../../utils/classnames"
+import { LoadingScreen } from "../LoadingScreen"
 
 export const PageLayout = ({children, title, progress, showtests}) => {
   const isProgress = typeof progress !== 'undefined'
+  const [loadingState, setLoadingState] = useState(0)
   const navigate = useNavigate()
   const search = useRef()
 
-  const handleSearch = (e) => {
+  const handleSearch = useCallback(async(e) => {
     e.preventDefault()
+    setLoadingState(1)
     const formResults = search.current
     const requestQuery = {
       search: formResults['searchField'].value,
     }
     if(requestQuery.search){
-      const isTestExists = services.questions.fetchOne(requestQuery.search);
+      const isTestExists = await services.questions.fetchOne(requestQuery.search);
       if (isTestExists){
-        navigate(`/testing/${isTestExists.id}`)
+        navigate(`/testing/${isTestExists.testid}`)
       }
       else{
         search.current['searchField'].value = ""
         search.current['searchField'].placeholder = "This test doesn't exist"
       }
     }
-  }
+    setLoadingState(0)
+  },[])
 
   return (
+    <>
+    {loadingState ? <LoadingScreen/> : false}
     <div className="content-wrapper">
 
       {showtests && 
@@ -42,7 +48,7 @@ export const PageLayout = ({children, title, progress, showtests}) => {
       </div>
 
       <div className="content">{children}</div>
-    </div>
+    </div></>
   )
   // progressBar.style.setProperty('--progress-bar', (step+1)*(100/children.length)+"%")
 }

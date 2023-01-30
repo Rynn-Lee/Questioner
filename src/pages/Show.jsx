@@ -41,7 +41,7 @@ export const Show = () => {
     {loadingState ? <LoadingScreen/> : false}
     <PageLayout title={`Tests Available: ${questions.length}`}>
       <div className='createTest'>
-        <Link to="/create" className="btn"><i className="fa-solid fa-plus"></i> <span>Create New Test</span></Link>
+        <Link to="/create" className="btn"><i className="fa-solid fa-plus"></i> <span>Create New Test</span><div /></Link>
       </div>
       {
         questions.map((question) => {

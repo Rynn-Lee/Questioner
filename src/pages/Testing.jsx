@@ -11,7 +11,6 @@ import { calcProgress, calcTimeProgress } from '../utils/calcProgress'
 import { LoadingScreen } from '../components/LoadingScreen';
 
 const getResults = (test, answers, user) => {
-  console.log("Test  2: ", test)
   const total = test.questions.length
     const correct = test.questions.reduce((acc, question, index) => {
       if (question.answer - 1 === answers[index]) return acc + 1
