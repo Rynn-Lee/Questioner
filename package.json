@@ -5,8 +5,9 @@
   "type": "module",
   "scripts": {
     "dev": "vite",
-    "build": "vite build --emptyOutDir",
-    "preview": "vite preview"
+    "build": "vite build",
+    "preview": "npm run build && vite preview",
+    "serve": "npm run build && vite preview"
   },
   "dependencies": {
     "@supabase/supabase-js": "^2.5.0",
