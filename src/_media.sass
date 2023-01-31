@@ -1,5 +1,6 @@
 @media screen and (max-width: 800px) 
   .sidebar
+    display: none
     flex-direction: row
     top: auto
     right: 0px
@@ -39,7 +40,6 @@
     font-size: 11pt !important
     left: 0px
     right: 0px
-    border-bottom: 1px $theme solid
   .extended
     padding: 15px 0px 0px 0px
     border-bottom: none
@@ -72,6 +72,7 @@
       right: 0px
       margin: 0px
     .cards
+      display: flexd
       margin-top: 3px
       display: flex
       gap: 0px
@@ -88,11 +89,15 @@
     display: flex
     justify-content: space-between
     padding: 0px
-    width: 100vw
+    width: max-content
     font-size: 9pt
-    left: -90vw
+    left: -200px
     &:hover
-      left: 0vw
+      width: 100%
+      left: 0px
+      
+  .scrollwrapper
+    margin-bottom: 50px  
 
   .login-div
     display: flex
