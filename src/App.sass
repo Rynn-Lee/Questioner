@@ -2,7 +2,6 @@ body
   background: #151521
   margin: 0px
   padding: 0px
-  height: 1vh
   color: #fff
   font:
     size: 8.9pt
@@ -151,19 +150,18 @@ ol
   padding: 15px 0px 0px 0px
 
 .content
-  top: 60px
+  top: 50px
   position: relative
-  padding: 15px
+  padding: 15px 15px 15px 15px
   left: 0px
   right: 0px
 
 .create-content
   position: relative
-  top: 25px
   display: flex
   justify-content: center
   justify-items: center
-  padding: 10px
+  padding: 0px 10px 10px 10px
 
 .horizontal
   display: flex
@@ -199,16 +197,14 @@ ol
       
 
 .creation-card
-  top: 60px
+  position: relative
   display: inline-table
-  position: fixed
   padding: 15px
-  height: auto
   background: #191929
   border-radius: 3px
   max-width: 40vw
   text-align: center
-  overflow: hidden
+  overflow-y: auto
   & input, & button
     transition: 0.2s
     box-sizing: border-box
@@ -217,7 +213,6 @@ ol
     border-radius: 5px
     margin: 5px
     min-width: 40vw
-    max-width: 40vw
     padding: 5px
     display: block
     color: #fff
@@ -423,9 +418,8 @@ ol
 .scrollwrapper
   position: inherit
   margin: 5px
-  overflow-y: auto
   border-radius: 10px
-  max-height: 55vh
+  // max-height: 55vh
 
 
 ::-webkit-scrollbar 
